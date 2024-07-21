@@ -10,13 +10,14 @@ import ImageGallery from "../ImageGallery/ImageGallery";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import ImageModal from "../ImageModal/ImageModal";
+
 function App() {
   const [photos, setPhotos] = useState([]);
   const [query, setQuery] = useState("fly");
   const [isLoader, setIsLoader] = useState(false);
   const [isLoadBtn, setIsLoadBtn] = useState(false);
   const [isModal, setIsModal] = useState(false);
-  const [isMessage, setIsMessage] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   // useEffect(() => {
   //   const getData = async () => {
@@ -44,7 +45,7 @@ function App() {
         {isLoader && <Loader />}
         {isLoadBtn && <LoadMoreBtn />}
         {isModal && <ImageModal />}
-        {isMessage && <ErrorMessage />}
+        <ErrorMessage isError={isError} />
       </MainContainer>
     </div>
   );
