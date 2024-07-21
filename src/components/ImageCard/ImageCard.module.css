@@ -1,0 +1,28 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.img {
+  width: 310px;
+  height: 200px;
+}
+.wrap:hover .soc {
+  opacity: 1;
+  transition: opacity 800ms ease;
+}
+.soc {
+  opacity: 0;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  right: 5px;
+  font-weight: 400;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

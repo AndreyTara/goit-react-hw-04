@@ -1,12 +1,22 @@
 import { useEffect, useState } from "react";
-// import viteLogo from "/vite.svg";
 import css from "./App.module.css";
-import axios from "axios";
-import fetchData from "../services/fetchData";
 import { URL, arrPhotos } from "../services/const.js";
+// import fetchData from "../services/fetchData";
+
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import SearchBar from "../SearchBar/SearchBar";
+import MainContainer from "../MainContainer/MainContainer";
+import ImageGallery from "../ImageGallery/ImageGallery";
+import Loader from "../Loader/Loader";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import ImageModal from "../ImageModal/ImageModal";
 function App() {
   const [photos, setPhotos] = useState([]);
   const [query, setQuery] = useState("fly");
+  const [isLoader, setIsLoader] = useState(false);
+  const [isLoadBtn, setIsLoadBtn] = useState(false);
+  const [isModal, setIsModal] = useState(false);
+  const [isMessage, setIsMessage] = useState(false);
 
   // useEffect(() => {
   //   const getData = async () => {
@@ -21,12 +31,23 @@ function App() {
   //   };
   //   getData();
   // }, [query]);
-  useEffect(() => {
-    setPhotos(arrPhotos);
-  }, [query]);
+  // useEffect(() => {
+  //   setPhotos(arrPhotos);
+  // }, [query]);
 
-  console.log(photos);
-  return <div className={css.root}></div>;
+  // console.log(photos);
+  return (
+    <div className={css.root}>
+      <SearchBar />
+      <MainContainer>
+        <ImageGallery photos={arrPhotos} />
+        {isLoader && <Loader />}
+        {isLoadBtn && <LoadMoreBtn />}
+        {isModal && <ImageModal />}
+        {isMessage && <ErrorMessage />}
+      </MainContainer>
+    </div>
+  );
 }
 
 export default App;
