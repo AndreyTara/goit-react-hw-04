@@ -26,7 +26,7 @@ function App() {
   }, [query]);
 
   console.log(photos);
-  return <div className={css.root}>huiiiii</div>;
+  return <div className={css.root}></div>;
 }
 
 export default App;
