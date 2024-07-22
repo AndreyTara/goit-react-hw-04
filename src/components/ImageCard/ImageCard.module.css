@@ -15,14 +15,17 @@
 .soc {
   opacity: 0;
   position: absolute;
-  bottom: 5px;
-  left: 5px;
-  right: 5px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
   font-weight: 400;
   font-size: 20px;
+  padding: 5px;
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.info {
 }
