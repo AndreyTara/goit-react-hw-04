@@ -1,21 +1,20 @@
 import css from "./ImageCard.module.css";
 import { FaRegHeart } from "react-icons/fa";
 
-const ImageCard = ({ photo }) => {
+const ImageCard = ({ item }) => {
   return (
     <div className={css.wrap}>
       <img
         className={css.img}
-        src={photo.urls.small}
-        alt={photo.alt_description}
+        src={item.urls.small}
+        alt={item.alt_description}
       />
       <div className={css.soc}>
-        <p className={css.date}>
+        <p className={css.info}>
           date:
-          {photo.updated_at.slice(0, 10)}
-          {/* {photo.topic_submissions.updated_at.slice(0, 9)} */}
+          {item.updated_at.slice(0, 10)}
         </p>
-        <p className={css.likes}>likes:{photo.likes}</p>
+        <p className={css.info}>likes:{item.likes}</p>
       </div>
     </div>
   );

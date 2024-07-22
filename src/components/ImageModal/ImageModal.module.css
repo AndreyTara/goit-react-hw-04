@@ -1,0 +1,40 @@
+.wrapper {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.content {
+  position: relative;
+  background-color: white;
+  /* padding: 20px; */
+  overflow: hidden;
+  max-width: 1000px;
+  border-radius: 5px;
+  /* h1 {
+    font-size: 2rem;
+  } */
+  /* --mod-); */
+}
+.closeBtn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  line-height: 0.75;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s ease;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+}
