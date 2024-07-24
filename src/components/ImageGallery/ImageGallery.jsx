@@ -1,10 +1,10 @@
 import css from "./ImageGallery.module.css";
 import ImageCard from "../ImageCard/ImageCard";
 
-const ImageGallery = ({ items, setClickId, setOnClose }) => {
-  const handleClick = (id) => {
-    setClickId(id);
-    setOnClose(true);
+const ImageGallery = ({ items, setItemClickGallery, setIsOpenModel }) => {
+  const handleClick = (item) => {
+    setItemClickGallery(item);
+    setIsOpenModel(true);
   };
   return (
     <ul className={css.ul}>
@@ -13,7 +13,7 @@ const ImageGallery = ({ items, setClickId, setOnClose }) => {
           <li
             className={css.li}
             key={item.id}
-            onClick={() => handleClick(item.id)}
+            onClick={() => handleClick(item)}
           >
             <ImageCard item={item} />
           </li>

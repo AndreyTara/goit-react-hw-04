@@ -19,6 +19,9 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  &:invalid {
+    border: 1px solid red;
+  }
 }
 .query {
   min-width: 280px;
@@ -27,6 +30,7 @@
   border: none;
   outline: none;
 }
+
 .btn {
   margin-right: 10px;
   display: flex;
