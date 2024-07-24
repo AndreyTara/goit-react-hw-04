@@ -33,6 +33,7 @@ function App() {
     const getData = async () => {
       try {
         if (!!query === false) return;
+        const a = 0;
         const response = await fetchData({ URL, query });
         setPhotos(response.results);
         setTotalPages(response.total_pages);
