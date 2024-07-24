@@ -51,17 +51,18 @@ function App() {
         {console.log("query", query)}
         {console.log("photos.length", photos)}
         {console.log("totalPages", totalPages)}
+        {console.log("itemClickGallery", itemClickGallery)}
         <ImageGallery
           items={photos}
           setItemClickGallery={setItemClickGallery}
           setIsOpenModal={setIsOpenModal}
         />
 
-        {/* {isOpenModal && (
+        {isOpenModal && (
           <ImageModal setIsOpenModal={setIsOpenModal}>
-            <Image item={clickId} arr={[]} />
+            <Image itemClickGallery={itemClickGallery} />
           </ImageModal>
-        )} */}
+        )}
         {/* {isLoader && <Loader />} */}
         {/* !photos && */}
         {/* {photos.length > 0 && isLoadBtn && (

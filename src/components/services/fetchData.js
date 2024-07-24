@@ -6,6 +6,7 @@ const fetchData = async ({ URL, query, page = 1, perPage = 12 }) => {
       query,
       page,
       per_page: perPage,
+      orientation: "landscape",
     },
   });
   return response.data;
