@@ -1,53 +1,12 @@
 import s from "./ImageModal.module.css";
 import { useEffect } from "react";
 
-// const ImageModal = ({ children, onClose, title = "Default modal" }) => {
-//   useEffect(() => {
-// const handleKeyDown = (e) => {
-//   console.log(e.key);
-//   if (e.key === "Escape") {
-//     onClose();
-//   }
-// };
-
-//     document.addEventListener("keydown", handleKeyDown);
-
-//     // console.log("Модальне вікно відмалювалось!");
-//     // const intervalID = setInterval(() => {
-//     //   console.log(new Date().toLocaleTimeString());
-//     // }, 1000);
-//     // const timeoutID = setTimeout(() => {
-//     //   console.log("Badabum!!!🔥");
-//     // }, 3000);
-
-//     return () => {
-//       console.log("Модалка закрилась!");
-//       document.removeEventListener("keydown", handleKeyDown);
-//     };
-//   }, [onClose]);
-
-//   return (
-//     <div className={s.wrapper} onClick={handleBackdropClick}>
-//       <div className={s.content}>
-//         <>
-//           <h1>{title}</h1>
-//           <hr />
-//         </>
-//         <button onClick={onClose} className={s.closeBtn}>
-//           ×
-//         </button>
-//         {children}
-//       </div>
-//     </div>
-//   );
-// };
-
-const ImageModal = ({ children, setOnClose }) => {
+const ImageModal = ({ children, setIsOpenModal, itemClickGallery }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       console.log(e.key);
       if (e.key === "Escape") {
-        setOnClose(false);
+        setIsOpenModal(false);
       }
     };
 
@@ -56,18 +15,18 @@ const ImageModal = ({ children, setOnClose }) => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [setOnClose]);
+  }, [setIsOpenModal]);
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
-      setOnClose(false);
+      setIsOpenModal(false);
     }
   };
 
   const handleClick = () => {
-    setOnClose(false);
+    setIsOpenModal(false);
   };
-
+  console.log("itemClickGallery", itemClickGallery);
   return (
     <div className={s.wrapper} onClick={handleBackdropClick}>
       <div className={s.content}>

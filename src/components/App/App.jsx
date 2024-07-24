@@ -33,6 +33,7 @@ function App() {
     const getData = async () => {
       try {
         if (!!query === false) return;
+        const a = 0;
         const response = await fetchData({ URL, query });
         setPhotos(response.results);
         setTotalPages(response.total_pages);
@@ -51,17 +52,18 @@ function App() {
         {console.log("query", query)}
         {console.log("photos.length", photos)}
         {console.log("totalPages", totalPages)}
+        {console.log("itemClickGallery", itemClickGallery)}
         <ImageGallery
           items={photos}
           setItemClickGallery={setItemClickGallery}
           setIsOpenModal={setIsOpenModal}
         />
 
-        {/* {isOpenModal && (
+        {isOpenModal && (
           <ImageModal setIsOpenModal={setIsOpenModal}>
-            <Image item={clickId} arr={[]} />
+            <Image itemClickGallery={itemClickGallery} />
           </ImageModal>
-        )} */}
+        )}
         {/* {isLoader && <Loader />} */}
         {/* !photos && */}
         {/* {photos.length > 0 && isLoadBtn && (

@@ -1,23 +1,13 @@
 import css from "./Image.module.css";
 
-const Image = ({ id, arr }) => {
-  const getItem = (id, items) => {
-    return items.filter((item) => item.id === id);
-  };
+const Image = ({ itemClickGallery }) => {
   return (
     <div className={css.wrap}>
-      {getItem(id, arr).map((item) => {
-        console.log(item);
-        return (
-          <>
-            <img
-              className={css.img}
-              src={item.urls.regular}
-              alt={item.alt_description}
-            />
-          </>
-        );
-      })}
+      <img
+        className={css.img}
+        src={itemClickGallery.urls.regular}
+        alt={itemClickGallery.alt_description}
+      />
     </div>
   );
 };

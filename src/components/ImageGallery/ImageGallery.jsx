@@ -1,10 +1,10 @@
 import css from "./ImageGallery.module.css";
 import ImageCard from "../ImageCard/ImageCard";
 
-const ImageGallery = ({ items, setItemClickGallery, setIsOpenModel }) => {
+const ImageGallery = ({ items, setItemClickGallery, setIsOpenModal }) => {
   const handleClick = (item) => {
     setItemClickGallery(item);
-    setIsOpenModel(true);
+    setIsOpenModal(true);
   };
   return (
     <ul className={css.ul}>
