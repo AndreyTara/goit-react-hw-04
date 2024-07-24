@@ -6,7 +6,8 @@ import {
   messageFieldInput,
   messageFieldErrorFetch,
 } from "../services/const.js";
-import fetchData from "../services/fetchData";
+import fetchData from "../services/fetchData.js";
+import fetchDataJson from "../services/fetchDataJson.js";
 
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import SearchBar from "../SearchBar/SearchBar";
@@ -20,61 +21,57 @@ import Image from "../Image/Image";
 function App() {
   const [photos, setPhotos] = useState([]);
   const [query, setQuery] = useState("");
-  const [onClose, setOnClose] = useState(false);
-  const [clickId, setClickId] = useState("");
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [itemClickGallery, setItemClickGallery] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
   // const [isLoader, setIsLoader] = useState(false);
-  // const [isLoadBtn, setIsLoadBtn] = useState(true);
   // const [isError, setIsError] = useState(false);
+  const [isLoadBtn, setIsLoadBtn] = useState(true);
+  const [albumId, setAlbumId] = useState(0);
 
-  // let count = 0;
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     try {
-  //       const response = await fetchData(URL, query);
-  //       // setPhotos((prev) => [...prev, ...response]);
-  //       // setPhotos(response.data);
-  //       console.log(response.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   getData();
-  //   console.log(count++);
-  // }, []);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        if (!!query === false) return;
+        const response = await fetchData({ URL, query });
+        setPhotos(response.results);
+        setTotalPages(response.total_pages);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  }, [query]);
 
-  // console.log(arrPhotos);
-  // const getItem = (id, arr) => {
-  //   return arr.filter((item) => item.id === clickId);
-  // };
-  // const arrFilter = arrPhotos.filter((item) => item.id === clickId);
-  // const item = getItem(clickId, arrPhotos);
   return (
     <div className={css.root}>
-      <SearchBar setQuery={setQuery} query={query} />
+      <SearchBar setQuery={setQuery} setIsLoadBtn={setIsLoadBtn} />
+
       <MainContainer>
+        {console.log("query", query)}
+        {console.log("photos.length", photos)}
+        {console.log("totalPages", totalPages)}
         <ImageGallery
-          items={arrPhotos}
-          setClickId={setClickId}
-          setOnClose={setOnClose}
+          items={photos}
+          setItemClickGallery={setItemClickGallery}
+          setIsOpenModal={setIsOpenModal}
         />
-        {/* {onClose && <ImageModal clickId={clickId} setOnClose={setOnClose} />} */}
-        {onClose && (
-          <ImageModal setOnClose={setOnClose}>
-            {/* <div>
-              {getItem(clickId, arrPhotos).map((item) => {
-                console.log(item);
-                return (
-                  <div >
-                    <img src={item.urls.regular} alt={item.alt_description} />
-                  </div>
-                );
-              })}
-            </div> */}
-            <Image id={clickId} arr={arrPhotos} />
+
+        {/* {isOpenModal && (
+          <ImageModal setIsOpenModal={setIsOpenModal}>
+            <Image item={clickId} arr={[]} />
           </ImageModal>
-        )}
+        )} */}
         {/* {isLoader && <Loader />} */}
-        {/* {isLoadBtn && <LoadMoreBtn />} */}
+        {/* !photos && */}
+        {/* {photos.length > 0 && isLoadBtn && (
+          <LoadMoreBtn
+            itemClick={{ itemClick }}
+            setAlbumId={setAlbumId}
+            setPhotos={setPhotos}
+          />
+        )} */}
+
         {/* {arrFilter?.length > 0 && (
           <ImageModal clickId={clickId} setOnClose={setOnClose} />
         )} */}

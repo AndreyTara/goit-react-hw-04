@@ -4,6 +4,10 @@ import { FaRegHeart } from "react-icons/fa";
 const ImageCard = ({ item }) => {
   return (
     <div className={css.wrap}>
+      {/* <img className={css.img} src={item.thumbnailUrl} alt={item.title} />
+      <div className={css.soc}>
+        <p className={css.info}>{item.title}</p>
+      </div> */}
       <img
         className={css.img}
         src={item.urls.small}

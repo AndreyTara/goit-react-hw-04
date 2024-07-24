@@ -1,12 +1,14 @@
 import css from "./LoadMoreBtn.module.css";
-import fetchData from "../services/fetchData";
+import fetchDataJson from "../services/fetchDataJson.js";
 import { URL } from "../services/const.js";
 
-const LoadMoreBtn = () => {
+const LoadMoreBtn = ({ setAlbumId, albumId, setPhotos }) => {
   const handleClick = () => {
+    setAlbumId((pref) => pref + 1);
+    // console.log(albumId);
     const getData = async () => {
       try {
-        const response = await fetchData(URL, query);
+        const response = await fetchDataJson(URL, albumId);
         setPhotos((prev) => [...prev, ...response]);
       } catch (error) {
         console.log(error);
