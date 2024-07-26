@@ -1,27 +1,26 @@
 import css from "./LoadMoreBtn.module.css";
-import fetchDataJson from "../services/fetchDataJson.js";
+import fetchData from "../services/fetchData.js";
 import { URL } from "../services/const.js";
+import { useEffect, useRef } from "react";
 
-const LoadMoreBtn = ({ setAlbumId, albumId, setPhotos }) => {
+const LoadMoreBtn = ({ photos, setPhotos, query, page, setPage }) => {
+  const btnLoadMore = useRef(null);
+
   const handleClick = () => {
-    setAlbumId((pref) => pref + 1);
-    // console.log(albumId);
-    const getData = async () => {
-      try {
-        const response = await fetchDataJson(URL, albumId);
-        setPhotos((prev) => [...prev, ...response]);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        console.log(photos);
-      }
-    };
-    getData();
+    setPage((pref) => pref + 1);
   };
-
+  useEffect(() => {
+    if (btnLoadMore.current) {
+      btnLoadMore.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  }, [photos]);
   return (
     <div className={css.wrap}>
-      <button onClick={handleClick} className={css.btn}>
+      <button onClick={handleClick} className={css.btn} ref={btnLoadMore}>
         Load more
       </button>
     </div>

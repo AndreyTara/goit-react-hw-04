@@ -1070,5 +1070,7 @@ export const arrPhotos = [
   },
 ];
 
-export const messageFieldInput = "Please fill empty the field.";
-export const messageFieldErrorFetch = "Please try again search.";
+export const message = {
+  errorField: "Please fill empty the field.",
+  errorFetch: "Please try again search.",
+};

@@ -1,32 +1,34 @@
 import css from "./SearchBar.module.css";
 import { FaSistrix } from "react-icons/fa";
-import { messageFieldInput } from "../services/const.js";
+import { message } from "../services/const.js";
 import { useState, useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-const SearchBar = ({ setQuery, setIsLoadBtn }) => {
+const SearchBar = ({
+  setQuery,
+  setIsLoadBtn,
+  setMessageError,
+  setPhotos,
+  setPage,
+}) => {
   const [input, setInput] = useState("");
-  const searchInput = useRef();
 
-  const notify = () =>
-    toast.error(messageFieldInput, {
-      duration: 1500,
-      position: "top-left",
-    });
+  const searchInput = useRef();
 
   function handleSubmit(event) {
     event.preventDefault();
+    setPhotos([]);
+    setPage(1);
     let currentInput = event.target.closest("FORM").elements["query"];
-    console.log(currentInput.value);
     if (!input.trim()) {
-      notify();
+      setMessageError(message.errorField);
       searchInput.current.setCustomValidity("Invalid input");
       return;
     }
     searchInput.current.setCustomValidity("");
     setQuery(currentInput.value.trim());
     setIsLoadBtn(true);
-    setInput("");
+    // setInput("");
   }
   function handleChange(event) {
     setInput(event.target.value);
@@ -48,7 +50,6 @@ const SearchBar = ({ setQuery, setIsLoadBtn }) => {
         <button onClick={handleSubmit} className={css.btn} type="submit">
           <FaSistrix />
         </button>
-        <Toaster />
       </form>
     </header>
   );

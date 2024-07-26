@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
 import css from "./App.module.css";
-import {
-  URL,
-  arrPhotos,
-  messageFieldInput,
-  messageFieldErrorFetch,
-} from "../services/const.js";
+import { URL, arrPhotos, message } from "../services/const.js";
 import fetchData from "../services/fetchData.js";
-import fetchDataJson from "../services/fetchDataJson.js";
+import { Link, animateScroll as scroll } from "react-scroll";
 
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import SearchBar from "../SearchBar/SearchBar";
@@ -24,62 +19,70 @@ function App() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [itemClickGallery, setItemClickGallery] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
-  // const [isLoader, setIsLoader] = useState(false);
-  // const [isError, setIsError] = useState(false);
+  const [isShowLoader, setIsShowLoader] = useState(false);
   const [isLoadBtn, setIsLoadBtn] = useState(true);
-  const [albumId, setAlbumId] = useState(0);
-
+  const [page, setPage] = useState(1);
+  const [messageError, setMessageError] = useState("");
   useEffect(() => {
     const getData = async () => {
       try {
-        if (!!query === false) return;
-        const a = 0;
-        const response = await fetchData({ URL, query });
-        setPhotos(response.results);
-        setTotalPages(response.total_pages);
+        if (!query) return;
+        const response = await fetchData({ URL, query, page });
+        if (page === 1) {
+          setPhotos(response.results);
+          setTotalPages(response);
+        } else {
+          setPhotos((pref) => [...pref, ...response.results]);
+          setTotalPages(response);
+        }
       } catch (error) {
         console.log(error);
+        setMessageError(message.errorFetch);
+      } finally {
+        if (totalPages.total_pages === page) setIsLoadBtn(false);
+        if (!photos) {
+          // alert("Get empty response, fill searchBar and try again...");
+          setMessageError(message.errorFetch);
+        }
       }
     };
     getData();
-  }, [query]);
+  }, [query, page]);
 
   return (
     <div className={css.root}>
-      <SearchBar setQuery={setQuery} setIsLoadBtn={setIsLoadBtn} />
-
+      <SearchBar
+        setQuery={setQuery}
+        setIsLoadBtn={setIsLoadBtn}
+        setMessageError={setMessageError}
+        setPhotos={setPhotos}
+        setPage={setPage}
+      />
       <MainContainer>
-        {console.log("query", query)}
-        {console.log("photos.length", photos)}
-        {console.log("totalPages", totalPages)}
-        {console.log("itemClickGallery", itemClickGallery)}
+        <p>page:{page}</p>
+        <p>totalPages:{totalPages.total_pages}</p>
+        <p>total:{totalPages.total}</p>
         <ImageGallery
           items={photos}
           setItemClickGallery={setItemClickGallery}
           setIsOpenModal={setIsOpenModal}
         />
-
         {isOpenModal && (
           <ImageModal setIsOpenModal={setIsOpenModal}>
             <Image itemClickGallery={itemClickGallery} />
           </ImageModal>
         )}
-        {/* {isLoader && <Loader />} */}
-        {/* !photos && */}
-        {/* {photos.length > 0 && isLoadBtn && (
+        {isShowLoader && <Loader />}
+        {photos.length > 0 && isLoadBtn && (
           <LoadMoreBtn
-            itemClick={{ itemClick }}
-            setAlbumId={setAlbumId}
+            photos={photos}
             setPhotos={setPhotos}
+            query={query}
+            page={page}
+            setPage={setPage}
           />
-        )} */}
-
-        {/* {arrFilter?.length > 0 && (
-          <ImageModal clickId={clickId} setOnClose={setOnClose} />
-        )} */}
-        {/* {getItem(clickId, arrPhotos)[0]["urls"]["regular"]} */}
-        {/* {onClose && <ImageModal clickId={clickId} setOnClose={setOnClose} />} */}
-        {/* <ErrorMessage isError={isError} messageField={messageFieldErrorFetch} /> */}
+        )}
+        {/* <ErrorMessage messageError={messageError} /> */}
       </MainContainer>
     </div>
   );
