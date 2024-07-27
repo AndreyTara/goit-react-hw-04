@@ -72,6 +72,7 @@ function App() {
   function handleSearch(query) {
     setPhotos([]);
     setPage(1);
+    setIsError(false);
     setQuery(query);
   }
   return (
