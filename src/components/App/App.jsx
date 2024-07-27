@@ -21,7 +21,9 @@ function App() {
   const [totalPages, setTotalPages] = useState(null);
   const [isShowLoader, setIsShowLoader] = useState(false);
   const [page, setPage] = useState(null);
+  const [isError, setIsError] = useState(false);
   const [messageError, setMessageError] = useState("");
+
   const lastElement = useRef();
 
   useEffect(() => {
@@ -32,11 +34,20 @@ function App() {
         inline: "center",
       });
     }
+    if (!photos) {
+      setIsError(true);
+      setMessageError(message.errorFetch);
+    }
+    if (photos.length < 1) {
+      setIsError(true);
+      setMessageError(message.errorFetch);
+    }
   }, [photos]);
 
   useEffect(() => {
     const getData = async () => {
       try {
+        setIsError(false);
         setIsShowLoader(true);
         if (!query) return;
         const response = await fetchData({ URL, query, page });
@@ -49,17 +60,10 @@ function App() {
         }
       } catch (error) {
         console.log(error);
-        // setMessageError(`${error}`);
-        alert(`${error}`);
+        setIsError(true);
+        setMessageError(message.errorFetch);
       } finally {
         setIsShowLoader(false);
-        if (!photos) {
-          console.log(photos);
-        }
-        // if (photos.length === 0) {
-        //   // setMessageError(message.errorFetch);
-        //   alert("false");
-        // }
       }
     };
     getData();
@@ -72,13 +76,20 @@ function App() {
   }
   return (
     <div className={css.root}>
-      <SearchBar setQuery={handleSearch} setMessageError={setMessageError} />
+      <SearchBar
+        setQuery={handleSearch}
+        setMessageError={setMessageError}
+        setIsError={setIsError}
+      />
       <MainContainer>
-        <ImageGallery
-          items={photos}
-          setItemClickGallery={setItemClickGallery}
-          setIsOpenModal={setIsOpenModal}
-        />
+        {isError && <ErrorMessage messageError={messageError} />}
+        {!isError && (
+          <ImageGallery
+            items={photos}
+            setItemClickGallery={setItemClickGallery}
+            setIsOpenModal={setIsOpenModal}
+          />
+        )}
         {isShowLoader && <Loader />}
         {isOpenModal && (
           <ImageModal setIsOpenModal={setIsOpenModal}>
@@ -88,7 +99,6 @@ function App() {
         {photos.length > 0 && page !== totalPages && (
           <LoadMoreBtn setPage={setPage} />
         )}
-        {/* {!messageError && <ErrorMessage messageError={messageError} />} */}
         <p ref={lastElement}></p>
       </MainContainer>
     </div>

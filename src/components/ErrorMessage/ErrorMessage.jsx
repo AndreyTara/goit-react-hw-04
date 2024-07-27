@@ -1,12 +1,14 @@
+import { useEffect } from "react";
 import css from "./ErrorMessage.module.css";
 import toast, { Toaster } from "react-hot-toast";
 
 const ErrorMessage = ({ messageError }) => {
-  if (messageError)
+  useEffect(() => {
     toast.error(messageError, {
-      duration: 1500,
+      duration: 1800,
       position: "top-left",
     });
+  }, [messageError]);
   return (
     <div>
       <Toaster />
