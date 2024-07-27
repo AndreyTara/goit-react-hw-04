@@ -1,8 +1,12 @@
 import css from "./ErrorMessage.module.css";
 import toast, { Toaster } from "react-hot-toast";
 
-const ErrorMessage = ({ isError }) => {
-  if (isError) toast.error("Please try again search later...");
+const ErrorMessage = ({ messageError }) => {
+  if (messageError)
+    toast.error(messageError, {
+      duration: 1500,
+      position: "top-left",
+    });
   return (
     <div>
       <Toaster />

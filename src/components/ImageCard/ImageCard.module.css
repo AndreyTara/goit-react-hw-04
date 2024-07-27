@@ -3,8 +3,9 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 310px;
-  height: 200px;
+  max-width: 310px;
+  max-height: 208px;
+  overflow: hidden;
 }
 .img {
   max-width: 100%;
