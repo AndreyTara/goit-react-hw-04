@@ -2,7 +2,6 @@ import css from "./SearchBar.module.css";
 import { FaSistrix } from "react-icons/fa";
 import { message } from "../services/const.js";
 import { useState, useRef } from "react";
-import toast, { Toaster } from "react-hot-toast";
 
 const SearchBar = ({ setQuery, setMessageError }) => {
   const [input, setInput] = useState("");
@@ -13,7 +12,8 @@ const SearchBar = ({ setQuery, setMessageError }) => {
     event.preventDefault();
     let currentInput = event.target.closest("FORM").elements["query"];
     if (!input.trim()) {
-      setMessageError(message.errorField);
+      // setMessageError(message.errorField);
+      alert(`${message.errorField}`);
       searchInput.current.setCustomValidity("Invalid input");
       return;
     }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import css from "./App.module.css";
 import { URL, arrPhotos, message } from "../services/const.js";
 import fetchData from "../services/fetchData.js";
@@ -22,6 +22,17 @@ function App() {
   const [isShowLoader, setIsShowLoader] = useState(false);
   const [page, setPage] = useState(null);
   const [messageError, setMessageError] = useState("");
+  const lastElement = useRef();
+
+  useEffect(() => {
+    if (lastElement.current) {
+      lastElement.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  }, [photos]);
 
   useEffect(() => {
     const getData = async () => {
@@ -38,13 +49,20 @@ function App() {
         }
       } catch (error) {
         console.log(error);
-        setMessageError(message.errorFetch);
+        // setMessageError(`${error}`);
+        alert(`${error}`);
       } finally {
         setIsShowLoader(false);
-        if (!photos) {
-          setMessageError(message.errorFetch);
-          return;
+        if (photos.length === 0) {
+          alert(`${message.errorFetch}`);
         }
+        // if (photos?.length === 0) {
+        //   alert(`${message.errorFetch}`);
+        // }
+        // if (photos.length === 0) {
+        //   // setMessageError(message.errorFetch);
+        //   alert("false");
+        // }
       }
     };
     getData();
@@ -58,11 +76,7 @@ function App() {
   return (
     <div className={css.root}>
       <SearchBar setQuery={handleSearch} setMessageError={setMessageError} />
-      {console.log(photos)}
       <MainContainer>
-        <p>page:{page}</p>
-        <p>totalPages:{totalPages}</p>
-
         <ImageGallery
           items={photos}
           setItemClickGallery={setItemClickGallery}
@@ -77,7 +91,8 @@ function App() {
         {photos.length > 0 && page !== totalPages && (
           <LoadMoreBtn setPage={setPage} />
         )}
-        <ErrorMessage messageError={messageError} />
+        {/* {!messageError && <ErrorMessage messageError={messageError} />} */}
+        <p ref={lastElement}></p>
       </MainContainer>
     </div>
   );

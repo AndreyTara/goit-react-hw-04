@@ -5,8 +5,8 @@ const Loader = () => {
     <div className={css.wrap}>
       <ProgressBar
         visible={true}
-        height="100"
-        width="100"
+        height="60"
+        width="60"
         ariaLabel="progress-bar-loading"
         wrapperStyle={{}}
         wrapperClass=""
