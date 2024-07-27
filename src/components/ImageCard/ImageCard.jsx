@@ -1,13 +1,18 @@
 import css from "./ImageCard.module.css";
 import { FaRegHeart } from "react-icons/fa";
 
-const ImageCard = ({ item }) => {
+const ImageCard = ({ item, setItemClickGallery, setIsOpenModal }) => {
+  const handleClick = (item) => {
+    setItemClickGallery(item);
+    setIsOpenModal(true);
+  };
   return (
     <div className={css.wrap}>
       <img
         className={css.img}
         src={item.urls.small}
         alt={item.alt_description}
+        onClick={() => handleClick(item)}
       />
       <div className={css.soc}>
         <p className={css.info}>

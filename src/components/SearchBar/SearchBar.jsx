@@ -3,7 +3,7 @@ import { FaSistrix } from "react-icons/fa";
 import { message } from "../services/const.js";
 import { useState, useRef } from "react";
 
-const SearchBar = ({ setQuery, setMessageError }) => {
+const SearchBar = ({ setQuery, setMessageError, setIsError }) => {
   const [input, setInput] = useState("");
 
   const searchInput = useRef();
@@ -12,8 +12,9 @@ const SearchBar = ({ setQuery, setMessageError }) => {
     event.preventDefault();
     let currentInput = event.target.closest("FORM").elements["query"];
     if (!input.trim()) {
-      // setMessageError(message.errorField);
-      alert(`${message.errorField}`);
+      setIsError(true);
+      setMessageError(message.errorField);
+      // alert(`${message.errorField}`);
       searchInput.current.setCustomValidity("Invalid input");
       return;
     }
