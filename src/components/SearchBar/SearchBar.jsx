@@ -4,21 +4,13 @@ import { message } from "../services/const.js";
 import { useState, useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-const SearchBar = ({
-  setQuery,
-  setIsLoadBtn,
-  setMessageError,
-  setPhotos,
-  setPage,
-}) => {
+const SearchBar = ({ setQuery, setMessageError }) => {
   const [input, setInput] = useState("");
 
   const searchInput = useRef();
 
   function handleSubmit(event) {
     event.preventDefault();
-    setPhotos([]);
-    setPage(1);
     let currentInput = event.target.closest("FORM").elements["query"];
     if (!input.trim()) {
       setMessageError(message.errorField);
@@ -27,9 +19,8 @@ const SearchBar = ({
     }
     searchInput.current.setCustomValidity("");
     setQuery(currentInput.value.trim());
-    setIsLoadBtn(true);
-    // setInput("");
   }
+
   function handleChange(event) {
     setInput(event.target.value);
   }

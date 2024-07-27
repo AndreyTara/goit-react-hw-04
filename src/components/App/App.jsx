@@ -18,71 +18,66 @@ function App() {
   const [query, setQuery] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [itemClickGallery, setItemClickGallery] = useState([]);
-  const [totalPages, setTotalPages] = useState(0);
+  const [totalPages, setTotalPages] = useState(null);
   const [isShowLoader, setIsShowLoader] = useState(false);
-  const [isLoadBtn, setIsLoadBtn] = useState(true);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(null);
   const [messageError, setMessageError] = useState("");
+
   useEffect(() => {
     const getData = async () => {
       try {
+        setIsShowLoader(true);
         if (!query) return;
         const response = await fetchData({ URL, query, page });
         if (page === 1) {
           setPhotos(response.results);
-          setTotalPages(response);
+          setTotalPages(response.total_pages);
         } else {
           setPhotos((pref) => [...pref, ...response.results]);
-          setTotalPages(response);
+          setTotalPages(response.total_pages);
         }
       } catch (error) {
         console.log(error);
         setMessageError(message.errorFetch);
       } finally {
-        if (totalPages.total_pages === page) setIsLoadBtn(false);
+        setIsShowLoader(false);
         if (!photos) {
-          // alert("Get empty response, fill searchBar and try again...");
           setMessageError(message.errorFetch);
+          return;
         }
       }
     };
     getData();
   }, [query, page]);
 
+  function handleSearch(query) {
+    setPhotos([]);
+    setPage(1);
+    setQuery(query);
+  }
   return (
     <div className={css.root}>
-      <SearchBar
-        setQuery={setQuery}
-        setIsLoadBtn={setIsLoadBtn}
-        setMessageError={setMessageError}
-        setPhotos={setPhotos}
-        setPage={setPage}
-      />
+      <SearchBar setQuery={handleSearch} setMessageError={setMessageError} />
+      {console.log(photos)}
       <MainContainer>
         <p>page:{page}</p>
-        <p>totalPages:{totalPages.total_pages}</p>
-        <p>total:{totalPages.total}</p>
+        <p>totalPages:{totalPages}</p>
+
         <ImageGallery
           items={photos}
           setItemClickGallery={setItemClickGallery}
           setIsOpenModal={setIsOpenModal}
         />
+        {isShowLoader && <Loader />}
         {isOpenModal && (
           <ImageModal setIsOpenModal={setIsOpenModal}>
             <Image itemClickGallery={itemClickGallery} />
           </ImageModal>
         )}
-        {isShowLoader && <Loader />}
-        {photos.length > 0 && isLoadBtn && (
-          <LoadMoreBtn
-            photos={photos}
-            setPhotos={setPhotos}
-            query={query}
-            page={page}
-            setPage={setPage}
-          />
+        {photos.length > 0 && page !== totalPages && (
+          <LoadMoreBtn setPage={setPage} />
         )}
-        {/* <ErrorMessage messageError={messageError} /> */}
+        <ErrorMessage messageError={messageError} />
       </MainContainer>
     </div>
   );

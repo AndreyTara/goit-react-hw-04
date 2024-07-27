@@ -8,8 +8,10 @@ const ImageGallery = ({ items, setItemClickGallery, setIsOpenModal }) => {
     setItemClickGallery(item);
     setIsOpenModal(true);
   };
+
   useEffect(() => {
     if (lastImageRef.current) {
+      // scrollIntoView;
       lastImageRef.current.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
@@ -17,6 +19,7 @@ const ImageGallery = ({ items, setItemClickGallery, setIsOpenModal }) => {
       });
     }
   }, [items]);
+
   return (
     <ul className={css.ul}>
       {items.map((item, index) => {
