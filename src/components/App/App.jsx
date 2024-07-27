@@ -53,6 +53,9 @@ function App() {
         alert(`${error}`);
       } finally {
         setIsShowLoader(false);
+        if (!photos) {
+          console.log(photos);
+        }
         // if (photos.length === 0) {
         //   // setMessageError(message.errorFetch);
         //   alert("false");
