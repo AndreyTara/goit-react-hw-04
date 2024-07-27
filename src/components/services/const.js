@@ -1,7 +1,3 @@
-const BASE_URL = "https://api.unsplash.com/";
-const END_POINT = "/search/photos"; //https://unsplash.com/documentation#schema
-const client_id = "yIp7KhzFsb4CVLb9gfY9k_AaLKTzD1SqXwegwczqCVs";
-export const URL = `${BASE_URL}${END_POINT}?client_id=${client_id}`;
 // export const URL = "https://jsonplaceholder.typicode.com/photos";
 
 export const arrPhotos = [

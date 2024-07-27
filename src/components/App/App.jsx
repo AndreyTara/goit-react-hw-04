@@ -1,9 +1,7 @@
 import { useEffect, useState, useRef } from "react";
-import css from "./App.module.css";
-import { URL, arrPhotos, message } from "../services/const.js";
-import fetchData from "../services/fetchData.js";
-import { Link, animateScroll as scroll } from "react-scroll";
-
+import { message } from "../services/const.js";
+import { fetchData } from "../services/fetchData.js";
+import { url } from "../services/url.js";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import SearchBar from "../SearchBar/SearchBar";
 import MainContainer from "../MainContainer/MainContainer";
@@ -12,6 +10,7 @@ import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import ImageModal from "../ImageModal/ImageModal";
 import Image from "../Image/Image";
+import css from "./App.module.css";
 
 function App() {
   const [photos, setPhotos] = useState([]);
@@ -23,7 +22,6 @@ function App() {
   const [page, setPage] = useState(null);
   const [isError, setIsError] = useState(false);
   const [messageError, setMessageError] = useState("");
-
   const lastElement = useRef();
 
   useEffect(() => {
@@ -50,7 +48,7 @@ function App() {
         setIsError(false);
         setIsShowLoader(true);
         if (!query) return;
-        const response = await fetchData({ URL, query, page });
+        const response = await fetchData({ url, query, page });
         if (page === 1) {
           setPhotos(response.results);
           setTotalPages(response.total_pages);
@@ -67,7 +65,7 @@ function App() {
       }
     };
     getData();
-  }, [query, page]);
+  }, [query, page, url]);
 
   function handleSearch(query) {
     setPhotos([]);
