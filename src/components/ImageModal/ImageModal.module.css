@@ -22,7 +22,7 @@
   overflow: hidden;
   overflow-y: auto;
   z-index: 1;
-  opacity: 0;
+  /* opacity: 0; */
   transition: opacity 0.3s;
 }
 .overlay::before,
@@ -51,7 +51,7 @@
   background-color: #fff;
   border-radius: 30px;
   /* filter: drop-shadow(0 0 10px orange); */
-  transform: translateY(50px);
+  /* transform: translateY(50px); */
   transition: transform 0.3s;
 }
 .closeBtn {

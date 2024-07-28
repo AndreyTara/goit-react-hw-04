@@ -1,5 +1,4 @@
 import css from "./ImageCard.module.css";
-import { FaRegHeart } from "react-icons/fa";
 
 const ImageCard = ({ item, setItemClickGallery, setIsModalOpen }) => {
   const handleClick = (item) => {

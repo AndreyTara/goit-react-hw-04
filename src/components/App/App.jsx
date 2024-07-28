@@ -8,7 +8,7 @@ import MainContainer from "../MainContainer/MainContainer";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import ImageModal from "../ImageModal11/ImageModal.jsx";
+import ImageModal from "../ImageModal/ImageModal.jsx";
 import Image from "../Image/Image";
 import css from "./App.module.css";
 
@@ -91,9 +91,8 @@ function App() {
           />
         )}
         {isShowLoader && <Loader />}
-        {/* isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} */}
         {isModalOpen && (
-          <ImageModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+          <ImageModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
             <Image itemClickGallery={itemClickGallery} />
           </ImageModal>
         )}
