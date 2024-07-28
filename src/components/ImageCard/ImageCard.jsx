@@ -1,10 +1,10 @@
 import css from "./ImageCard.module.css";
 import { FaRegHeart } from "react-icons/fa";
 
-const ImageCard = ({ item, setItemClickGallery, setIsOpenModal }) => {
+const ImageCard = ({ item, setItemClickGallery, setIsModalOpen }) => {
   const handleClick = (item) => {
     setItemClickGallery(item);
-    setIsOpenModal(true);
+    setIsModalOpen(true);
   };
   return (
     <div className={css.wrap}>

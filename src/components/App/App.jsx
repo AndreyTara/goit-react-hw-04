@@ -8,20 +8,21 @@ import MainContainer from "../MainContainer/MainContainer";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import ImageModal from "../ImageModal/ImageModal";
+import ImageModal from "../ImageModal11/ImageModal.jsx";
 import Image from "../Image/Image";
 import css from "./App.module.css";
 
 function App() {
   const [photos, setPhotos] = useState([]);
   const [query, setQuery] = useState("");
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemClickGallery, setItemClickGallery] = useState([]);
   const [totalPages, setTotalPages] = useState(null);
   const [isShowLoader, setIsShowLoader] = useState(false);
   const [page, setPage] = useState(null);
   const [isError, setIsError] = useState(false);
   const [messageError, setMessageError] = useState("");
+
   const lastElement = useRef();
 
   useEffect(() => {
@@ -86,12 +87,13 @@ function App() {
           <ImageGallery
             items={photos}
             setItemClickGallery={setItemClickGallery}
-            setIsOpenModal={setIsOpenModal}
+            setIsModalOpen={setIsModalOpen}
           />
         )}
         {isShowLoader && <Loader />}
-        {isOpenModal && (
-          <ImageModal setIsOpenModal={setIsOpenModal}>
+        {/* isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} */}
+        {isModalOpen && (
+          <ImageModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
             <Image itemClickGallery={itemClickGallery} />
           </ImageModal>
         )}

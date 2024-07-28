@@ -1,0 +1,12 @@
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+.ReactModal__Overlay--after-close {
+  opacity: 0;
+}
+.ReactModal__Content--after-open {
+  transform: translateY(0);
+}
+.ReactModal__Content--after-close {
+  transform: translateY(50px);
+}

@@ -1,42 +1,45 @@
-import s from "./ImageModal.module.css";
-import { useEffect } from "react";
+import React from "react";
+import Modal from "react-modal";
+import css from "./ImageModal.module.css";
+import "./Modal.css";
+// const customStyles = {
+//   content: {
+//     top: "50%",
+//     left: "50%",
+//     right: "auto",
+//     bottom: "auto",
+//     marginRight: "-50%",
+//     transform: "translate(-50%, -50%)",
+//   },
+// };
+Modal.setAppElement("#root");
 
-const ImageModal = ({ children, setIsOpenModal, itemClickGallery }) => {
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      console.log(e.key);
-      if (e.key === "Escape") {
-        setIsOpenModal(false);
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [setIsOpenModal]);
-
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      setIsOpenModal(false);
-    }
+function ImageModal({ children, isModalOpen, setIsModalOpen }) {
+  const handleOnClick = () => {
+    setIsModalOpen(false);
+    console.log("Click");
   };
-
-  const handleClick = () => {
-    setIsOpenModal(false);
-  };
-  console.log("itemClickGallery", itemClickGallery);
   return (
-    <div className={s.wrapper} onClick={handleBackdropClick}>
-      <div className={s.content}>
-        <button onClick={handleClick} className={s.closeBtn}>
-          ×
+    <div>
+      <Modal
+        isOpen={isModalOpen}
+        overlayClassName={css.overlay}
+        className={css.content}
+        ariaHideApp={false}
+        onRequestClose={() => handleOnClick()}
+        closeTimeoutMS={300}
+      >
+        <button
+          type="button"
+          className={css.closeBtn}
+          onClick={() => handleOnClick()}
+        >
+          x
         </button>
         {children}
-      </div>
+      </Modal>
     </div>
   );
-};
+}
 
 export default ImageModal;
