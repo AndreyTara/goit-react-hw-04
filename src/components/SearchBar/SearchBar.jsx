@@ -14,7 +14,6 @@ const SearchBar = ({ setQuery, setMessageError, setIsError }) => {
     if (!input.trim()) {
       setIsError(true);
       setMessageError(message.errorField);
-      // alert(`${message.errorField}`);
       searchInput.current.setCustomValidity("Invalid input");
       return;
     }

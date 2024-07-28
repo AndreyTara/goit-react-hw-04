@@ -1,7 +1,7 @@
 import css from "./ImageGallery.module.css";
 import ImageCard from "../ImageCard/ImageCard";
 
-const ImageGallery = ({ items, setItemClickGallery, setIsOpenModal }) => {
+const ImageGallery = ({ items, setItemClickGallery, setIsModalOpen }) => {
   return (
     <ul className={css.ul}>
       {items.map((item, index) => {
@@ -10,7 +10,7 @@ const ImageGallery = ({ items, setItemClickGallery, setIsOpenModal }) => {
             <ImageCard
               item={item}
               setItemClickGallery={setItemClickGallery}
-              setIsOpenModal={setIsOpenModal}
+              setIsModalOpen={setIsModalOpen}
             />
           </li>
         );
