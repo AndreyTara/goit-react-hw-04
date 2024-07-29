@@ -32,15 +32,12 @@ function App() {
         inline: "center",
       });
     }
-    if (!photos) {
-      setIsError(true);
-      setMessageError(message.errorFetch);
-    }
     if (photos.length < 1) {
       setIsError(true);
       setMessageError(message.errorFetch);
+      setIsShowLoader(false);
     }
-  }, [photos]);
+  }, [photos, isError]);
 
   useEffect(() => {
     const getData = async () => {
@@ -70,7 +67,6 @@ function App() {
   function handleSearch(query) {
     setPhotos([]);
     setPage(1);
-    setIsError(false);
     setQuery(query);
   }
   return (
@@ -98,7 +94,7 @@ function App() {
           />
         )}
 
-        {photos.length > 0 && page !== totalPages && (
+        {!isError && photos.length > 0 && page !== totalPages && (
           <LoadMoreBtn setPage={setPage} />
         )}
         <p ref={lastElement}></p>
