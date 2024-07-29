@@ -18,7 +18,7 @@ function App() {
   const [itemClickGallery, setItemClickGallery] = useState([]);
   const [totalPages, setTotalPages] = useState(null);
   const [isShowLoader, setIsShowLoader] = useState(false);
-  const [page, setPage] = useState(null);
+  const [page, setPage] = useState(1);
   const [isError, setIsError] = useState(false);
   const [messageError, setMessageError] = useState("");
 
@@ -47,7 +47,7 @@ function App() {
       try {
         setIsError(false);
         setIsShowLoader(true);
-        if (!query) return;
+        if (query === "") return;
         const response = await fetchData({ url, query, page });
         if (page === 1) {
           setPhotos(response.results);
