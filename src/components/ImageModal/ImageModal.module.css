@@ -1,5 +1,5 @@
-.overlay {
-  /* position: fixed;
+/* .overlay {
+  position: fixed;
   top: 10px;
   bottom: 10px;
   right: 10px;
@@ -8,7 +8,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5); */
+  background-color: rgba(0, 0, 0, 0.5);
+
   position: fixed;
   top: 0;
   left: 0;
@@ -22,25 +23,26 @@
   overflow: hidden;
   overflow-y: auto;
   z-index: 1;
-  /* opacity: 0; */
+  opacity: 0;
   transition: opacity 0.3s;
-}
-.overlay::before,
+} */
+/* .overlay::before,
 .overlay::after {
   content: "";
   display: block;
   height: 1px;
   flex-grow: 1;
-}
-.content {
-  /* position: relative;
+} */
+/* .content {
+  position: relative;
   background-color: rgba(200, 200, 200, 0.2);
   padding: 20px;
   overflow: hidden;
   max-width: 1000px;
   max-width: 95vw;
   max-height: 95vh;
-  border-radius: 5px; */
+  border-radius: 5px;
+
   position: relative;
   display: flex;
   flex-direction: column;
@@ -50,11 +52,11 @@
   padding: 50px 20px;
   background-color: #fff;
   border-radius: 30px;
-  /* filter: drop-shadow(0 0 10px orange); */
-  /* transform: translateY(50px); */
+  filter: drop-shadow(0 0 10px orange);
+  transform: translateY(50px);
   transition: transform 0.3s;
-}
-.closeBtn {
+} */
+/* .closeBtn {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -73,4 +75,19 @@
   &:hover {
     background-color: rgba(255, 255, 255, 0.95);
   }
+} */
+
+.wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img {
+  max-width: 100%;
+  max-height: 100%;
 }

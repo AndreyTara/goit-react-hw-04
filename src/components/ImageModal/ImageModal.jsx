@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import css from "./ImageModal.module.css";
 import "./Modal.css";
 
-function ImageModal({ children, isOpen, setIsOpen }) {
+function ImageModal({ isOpen, setIsOpen, itemClickGallery }) {
   const handleClick = () => {
     setIsOpen(false);
   };
@@ -24,7 +24,13 @@ function ImageModal({ children, isOpen, setIsOpen }) {
         >
           x
         </button>
-        {children}
+        <div className={css.wrap}>
+          <img
+            className={css.img}
+            src={itemClickGallery.urls.regular}
+            alt={itemClickGallery.alt_description}
+          />
+        </div>
       </Modal>
     </div>
   );

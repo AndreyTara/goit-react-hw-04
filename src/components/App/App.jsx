@@ -9,7 +9,6 @@ import ImageGallery from "../ImageGallery/ImageGallery";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import ImageModal from "../ImageModal/ImageModal.jsx";
-import Image from "../Image/Image";
 import css from "./App.module.css";
 
 function App() {
@@ -92,10 +91,13 @@ function App() {
         )}
         {isShowLoader && <Loader />}
         {isModalOpen && (
-          <ImageModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
-            <Image itemClickGallery={itemClickGallery} />
-          </ImageModal>
+          <ImageModal
+            isOpen={isModalOpen}
+            setIsOpen={setIsModalOpen}
+            itemClickGallery={itemClickGallery}
+          />
         )}
+
         {photos.length > 0 && page !== totalPages && (
           <LoadMoreBtn setPage={setPage} />
         )}
