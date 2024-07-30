@@ -5,25 +5,28 @@ import { useState, useRef } from "react";
 
 const SearchBar = ({ setQuery, setMessageError, setIsError }) => {
   const [input, setInput] = useState("");
-
-  const searchInput = useRef();
+  // const searchInput = useRef();
 
   function handleSubmit(event) {
     event.preventDefault();
-    let currentInput = event.target.closest("FORM").elements["query"];
-    if (!input.trim()) {
+    // const currentInput = searchInput.current.value.trim();
+
+    const currentInput = event.target
+      .closest("FORM")
+      .elements["query"].value.trim();
+
+    if (currentInput === "") {
       setIsError(true);
       setMessageError(message.errorField);
-      searchInput.current.setCustomValidity("Invalid input");
       return;
     }
-    searchInput.current.setCustomValidity("");
-    setQuery(currentInput.value.trim());
+    setQuery(currentInput);
   }
 
   function handleChange(event) {
     setInput(event.target.value);
   }
+
   return (
     <header className={css.header}>
       <form className={css.form}>
@@ -36,7 +39,7 @@ const SearchBar = ({ setQuery, setMessageError, setIsError }) => {
           value={input}
           onChange={handleChange}
           placeholder="Search images and photos"
-          ref={searchInput}
+          // ref={searchInput}
         />
         <button onClick={handleSubmit} className={css.btn} type="submit">
           <FaSistrix />

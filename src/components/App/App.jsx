@@ -12,8 +12,8 @@ import ImageModal from "../ImageModal/ImageModal.jsx";
 import css from "./App.module.css";
 
 function App() {
-  const [photos, setPhotos] = useState([]);
   const [query, setQuery] = useState("");
+  const [photos, setPhotos] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemClickGallery, setItemClickGallery] = useState([]);
   const [totalPages, setTotalPages] = useState(null);
@@ -45,6 +45,7 @@ function App() {
         setIsError(false);
         setIsShowLoader(true);
         if (query === "") return;
+
         const response = await fetchData({ url, query, page });
         if (page === 1) {
           setPhotos(response.results);
@@ -68,6 +69,7 @@ function App() {
     setPhotos([]);
     setPage(1);
     setQuery(query);
+    setIsError(false);
   }
   return (
     <div className={css.root}>
