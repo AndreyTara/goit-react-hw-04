@@ -23,21 +23,16 @@ const SearchBar = ({
 
   function handleSubmit(event) {
     event.preventDefault();
-    let currentInput = event.target.closest("FORM").elements["query"];
     if (!input.trim()) {
       setIsError(true);
       setMessageError(message.errorField);
-      // alert(`${message.errorField}`);
-      searchInput.current.setCustomValidity("Invalid input");
       return;
     }
-    searchInput.current.setCustomValidity("");
-    setQuery(searchInput.value.trim());
+    setQuery(searchInput.current.value.trim());
   }
 
   function handleChange(event) {
     setInput(event.target.value);
-    searchInput.current.setCustomValidity("");
   }
 
   return (
@@ -52,7 +47,7 @@ const SearchBar = ({
           value={input}
           onChange={handleChange}
           placeholder="Search images and photos"
-          // ref={searchInput}
+          ref={searchInput}
         />
         <button onClick={handleSubmit} className={css.btn} type="submit">
           <FaSistrix />
