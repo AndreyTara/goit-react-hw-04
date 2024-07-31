@@ -97,7 +97,10 @@ function App() {
             itemClickGallery={itemClickGallery}
           />
         )}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2135e416ba16921f4604c10ec260dbd6cfa06b73
         {photos.length > 0 && page !== totalPages && !isError && (
           <LoadMoreBtn setPage={setPage} />
         )}

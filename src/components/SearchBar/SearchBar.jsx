@@ -12,8 +12,14 @@ const SearchBar = ({
   setIsError,
 }) => {
   const [input, setInput] = useState("");
-
   const searchInput = useRef();
+
+  useEffect(() => {
+    toast.error(messageError, {
+      duration: 1800,
+      position: "top-left",
+    });
+  }, [messageError]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -26,7 +32,7 @@ const SearchBar = ({
       return;
     }
     searchInput.current.setCustomValidity("");
-    setQuery(currentInput.value.trim());
+    setQuery(searchInput.value.trim());
   }
 
   function handleChange(event) {
