@@ -42,6 +42,8 @@ function App() {
       setIsError(true);
       setMessageError(message.errorFetch);
     }
+    if (photos.length > 0 && page !== totalPages) {
+    }
   }, [photos]);
 
   useEffect(() => {
@@ -78,7 +80,9 @@ function App() {
     <div className={css.root}>
       <SearchBar
         setQuery={handleSearch}
+        messageError={messageError}
         setMessageError={setMessageError}
+        isError={isError}
         setIsError={setIsError}
       />
       <MainContainer>
@@ -96,7 +100,7 @@ function App() {
             <Image itemClickGallery={itemClickGallery} />
           </ImageModal>
         )}
-        {photos.length > 0 && page !== totalPages && (
+        {photos.length > 0 && page !== totalPages && !isError && (
           <LoadMoreBtn setPage={setPage} />
         )}
         <p ref={lastElement}></p>
