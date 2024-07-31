@@ -12,6 +12,7 @@ const SearchBar = ({
   setIsError,
 }) => {
   const [input, setInput] = useState("");
+
   useEffect(() => {
     toast.error(messageError, {
       duration: 1800,
@@ -22,9 +23,7 @@ const SearchBar = ({
 
   function handleSubmit(event) {
     event.preventDefault();
-    let currentInput = event.target.closest("FORM").elements["query"];
-
-    if (!input.trim()) {
+      if (!input.trim()) {
       setIsError(true);
       setMessageError(message.errorField);
       searchInput.current.setCustomValidity("Invalid input");
@@ -34,10 +33,27 @@ const SearchBar = ({
     setQuery(searchInput.current.value.trim());
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    // const currentInput = searchInput.current.value.trim();
+
+    const currentInput = event.target
+      .closest("FORM")
+      .elements["query"].value.trim();
+
+    if (currentInput === "") {
+      setIsError(true);
+      setMessageError(message.errorField);
+      return;
+    }
+    setQuery(currentInput);
+  }
+
   function handleChange(event) {
     setInput(event.target.value);
     searchInput.current.setCustomValidity("");
   }
+
   return (
     <header className={css.header}>
       <form className={css.form}>
@@ -50,7 +66,7 @@ const SearchBar = ({
           value={input}
           onChange={handleChange}
           placeholder="Search images and photos"
-          ref={searchInput}
+          // ref={searchInput}
         />
         <button onClick={handleSubmit} className={css.btn} type="submit">
           <FaSistrix />
