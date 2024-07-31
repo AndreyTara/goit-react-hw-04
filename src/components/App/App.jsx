@@ -37,7 +37,7 @@ function App() {
       setMessageError(message.errorFetch);
       setIsShowLoader(false);
     }
-  }, [photos]);
+  }, [photos, page]);
 
   useEffect(() => {
     const getData = async () => {
