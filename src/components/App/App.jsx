@@ -37,7 +37,7 @@ function App() {
       setMessageError(message.errorFetch);
       setIsShowLoader(false);
     }
-  }, [photos, isError]);
+  }, [photos]);
 
   useEffect(() => {
     const getData = async () => {
@@ -75,7 +75,9 @@ function App() {
     <div className={css.root}>
       <SearchBar
         setQuery={handleSearch}
+        messageError={messageError}
         setMessageError={setMessageError}
+        isError={isError}
         setIsError={setIsError}
       />
       <MainContainer>
@@ -95,8 +97,7 @@ function App() {
             itemClickGallery={itemClickGallery}
           />
         )}
-
-        {!isError && photos.length > 0 && page !== totalPages && (
+        {photos.length > 0 && page !== totalPages && !isError && (
           <LoadMoreBtn setPage={setPage} />
         )}
         <p ref={lastElement}></p>
