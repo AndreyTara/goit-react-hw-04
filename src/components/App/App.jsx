@@ -25,7 +25,7 @@ function App() {
   const lastElement = useRef();
 
   useEffect(() => {
-    if (lastElement.current) {
+    if (page > 1) {
       lastElement.current.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
