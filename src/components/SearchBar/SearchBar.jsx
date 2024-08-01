@@ -23,6 +23,7 @@ const SearchBar = ({
 
   function handleSubmit(event) {
     event.preventDefault();
+
     if (!input.trim()) {
       setIsError(true);
       setMessageError(message.errorField);
@@ -31,13 +32,18 @@ const SearchBar = ({
     setQuery(searchInput.current.value.trim());
   }
 
+  function handleKeyPress(e) {
+    if (event.key === "Enter") {
+      event.preventDefault(); // відміна дії за замовчуванням
+    }
+  }
   function handleChange(event) {
     setInput(event.target.value);
   }
 
   return (
     <header className={css.header}>
-      <form className={css.form}>
+      <form className={css.form} onSubmit={handleSubmit}>
         <input
           className={css.query}
           name="query"
@@ -46,10 +52,11 @@ const SearchBar = ({
           autoFocus
           value={input}
           onChange={handleChange}
+          onKeyDown={handleKeyPress}
           placeholder="Search images and photos"
           ref={searchInput}
         />
-        <button onClick={handleSubmit} className={css.btn} type="submit">
+        <button className={css.btn} type="submit">
           <FaSistrix />
         </button>
       </form>
