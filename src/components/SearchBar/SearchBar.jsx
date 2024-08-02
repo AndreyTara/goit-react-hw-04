@@ -14,19 +14,14 @@ const SearchBar = ({
   const [input, setInput] = useState("");
   const searchInput = useRef();
 
-  useEffect(() => {
-    toast.error(messageError, {
-      duration: 1800,
-      position: "top-left",
-    });
-  }, [messageError]);
-
   function handleSubmit(event) {
     event.preventDefault();
-
     if (!input.trim()) {
       setIsError(true);
-      setMessageError(message.errorField);
+      toast.error(message.errorField, {
+        duration: 1800,
+        position: "top-left",
+      });
       return;
     }
     setQuery(searchInput.current.value.trim());
